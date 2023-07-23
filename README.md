@@ -79,7 +79,7 @@ Things you may want to cover:
 
 | Column        | Type       | Options                        |
 | ------------- | ---------- | ------------------------------ |
-| orders        | references | null: false, foreign_key: true |
+| order         | references | null: false, foreign_key: true |
 | post_code     | string     | null: false                    |
 | prefecture_id | string     | null: false                    |
 | city          | string     | null: false                    |
