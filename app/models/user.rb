@@ -5,8 +5,6 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   with_options presence: true do
-    PASSWORD_REGEX = /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i.freeze
-  
     validates :nickname, uniqueness: true
     validates :family_name, format: { with: /\A[ぁ-んァ-ヶ一-龥々ー]+\z/ }
     validates :first_name, format: { with: /\A[ぁ-んァ-ヶ一-龥々ー]+\z/ }
