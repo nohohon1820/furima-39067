@@ -4,6 +4,9 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  has_many :items
+  # has_many :orders
+
   validate :password_complexity_validation
 
   with_options presence: true do
@@ -20,9 +23,8 @@ class User < ApplicationRecord
   def password_complexity_validation
     return if password.blank?
 
-    unless password.match(/\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i)
-      errors.add(:password, 'は半角英字と数字の両方を含めてください')
-    end
-  end
+    return if password.match(/\A(?=.*?[a-z])(?=.*?\d)[a-z\d]+\z/i)
 
+    errors.add(:password, 'は半角英字と数字の両方を含めてください')
+  end
 end
