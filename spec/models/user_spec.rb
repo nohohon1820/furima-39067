@@ -67,13 +67,13 @@ RSpec.describe User, type: :model do
         @user.valid?
         expect(@user.errors.full_messages).to include('Password は半角英字も含めてください')
       end
-      it 'パスワード（確認含む）が英字のみだと登録できない'do
+      it 'パスワード（確認含む）が英字のみだと登録できない' do
         @user.password = 'abcdef'
         @user.password_confirmation = 'abcdef'
         @user.valid?
         expect(@user.errors.full_messages).to include('Password は半角数字も含めてください')
       end
-      it 'パスワード（確認含む）が全角文字だと登録できない'do
+      it 'パスワード（確認含む）が全角文字だと登録できない' do
         @user.password = 'パスワード'
         @user.password_confirmation = 'パスワード'
         @user.valid?
@@ -109,10 +109,10 @@ RSpec.describe User, type: :model do
         @user.valid?
         expect(@user.errors.full_messages).to include("Birthday can't be blank")
       end
-      it 'メールアドレスに@を含まない場合、登録できない'do
+      it 'メールアドレスに@を含まない場合、登録できない' do
         @user.email = 'testtest.com'
         @user.valid?
-        expect(@user.errors.full_messages).to include("Email is invalid")
+        expect(@user.errors.full_messages).to include('Email is invalid')
       end
       it '姓（全角）が空だと登録できない' do
         @user.family_name = ''

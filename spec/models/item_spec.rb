@@ -11,12 +11,12 @@ RSpec.describe Item, type: :model do
         expect(@item).to be_valid
       end
     end
-    
+
     context '商品出品がうまくいかないとき' do
       it 'userが紐づいていない場合は登録できない' do
         @item.user = nil
         @item.valid?
-        expect(@item.errors.full_messages).to include("User must exist")
+        expect(@item.errors.full_messages).to include('User must exist')
       end
       it 'imageが空では登録されない' do
         @item.image = nil
@@ -36,7 +36,7 @@ RSpec.describe Item, type: :model do
       it 'カテゴリーが空では登録されない' do
         @item.category_id = nil
         @item.valid?
-        expect(@item.errors.full_messages).to include("Category can't be blank", "Category is not a number")
+        expect(@item.errors.full_messages).to include("Category can't be blank", 'Category is not a number')
       end
       it 'カテゴリーが「---」だと出品できない' do
         @item.category_id = 0
@@ -46,7 +46,7 @@ RSpec.describe Item, type: :model do
       it '商品の状態が空では登録されない' do
         @item.condition_id = nil
         @item.valid?
-        expect(@item.errors.full_messages).to include("Condition can't be blank", "Condition is not a number")
+        expect(@item.errors.full_messages).to include("Condition can't be blank", 'Condition is not a number')
       end
       it '商品の状態が「---」だと出品できない' do
         @item.condition_id = 0
@@ -56,7 +56,7 @@ RSpec.describe Item, type: :model do
       it '配送料の負担が空では登録されない' do
         @item.charged_id = nil
         @item.valid?
-        expect(@item.errors.full_messages).to include("Charged can't be blank", "Charged is not a number")
+        expect(@item.errors.full_messages).to include("Charged can't be blank", 'Charged is not a number')
       end
       it '配送料の負担が「---」だと出品できない' do
         @item.charged_id = 0
@@ -66,7 +66,7 @@ RSpec.describe Item, type: :model do
       it '発送元の地域が空では登録されない' do
         @item.prefecture_id = nil
         @item.valid?
-        expect(@item.errors.full_messages).to include("Prefecture can't be blank", "Prefecture is not a number")
+        expect(@item.errors.full_messages).to include("Prefecture can't be blank", 'Prefecture is not a number')
       end
       it '発送元の地域が「---」だと出品できない' do
         @item.prefecture_id = 0
@@ -76,7 +76,7 @@ RSpec.describe Item, type: :model do
       it '配送までの日数が空では登録されない' do
         @item.shipping_day_id = nil
         @item.valid?
-        expect(@item.errors.full_messages).to include("Shipping day can't be blank", "Shipping day is not a number")
+        expect(@item.errors.full_messages).to include("Shipping day can't be blank", 'Shipping day is not a number')
       end
       it '発送までの日数が「---」だと出品できない' do
         @item.shipping_day_id = 0
@@ -89,9 +89,9 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include("Price can't be blank", 'Price is not a number')
       end
       it 'priceが半角数字以外では登録できない' do
-        @item.price = "１０００"
+        @item.price = '１０００'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price is not a number")
+        expect(@item.errors.full_messages).to include('Price is not a number')
       end
       it '価格が300円未満だと出品できない' do
         @item.price = 100
