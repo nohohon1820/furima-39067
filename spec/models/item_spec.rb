@@ -14,7 +14,7 @@ RSpec.describe Item, type: :model do
     
     context '商品出品がうまくいかないとき' do
       it 'userが紐づいていない場合は登録できない' do
-        @item.user_id = nil
+        @item.user = nil
         @item.valid?
         expect(@item.errors.full_messages).to include("User must exist")
       end
