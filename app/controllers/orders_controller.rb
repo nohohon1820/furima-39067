@@ -1,5 +1,6 @@
 class OrdersController < ApplicationController
-
+  before_action :authenticate_user!
+  before_action :not_purchased_item, only: [:index, :create]
 
   def index
     @order_form = OrderForm.new
@@ -19,9 +20,12 @@ class OrdersController < ApplicationController
   private
 
   def order_params
-    params.require(:order_form).permit(:post_code, :prefecture_id, :city, :address, :building_name, :phone_number).merge(usesr_id: current_user_id, item_id: params[:item_id], token: params[:token])
+    params.require(:order_form).permit(:post_code, :prefecture_id, :city, :address, :building_name, :phone_number).merge(user_id: current_user.id, item_id: params[:item_id], token: params[:token])
   end
 
-
+  def not_purchased_item
+    @item = Item.find(params[:item_id])
+    redirect_to root_path if current_user.id == @item.user_id || @item.order.present?
+  end
 
 end
