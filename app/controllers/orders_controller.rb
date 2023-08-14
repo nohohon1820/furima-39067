@@ -4,6 +4,9 @@ class OrdersController < ApplicationController
 
   def index
     @order_form = OrderForm.new
+    if current_user == @item.user || @item.order.present?
+      redirect_to root_path
+    end
   end
 
   def create
@@ -25,9 +28,6 @@ class OrdersController < ApplicationController
 
   def not_purchased_item
     @item = Item.find(params[:item_id])
-    if current_user.id == @item.user_id || @item.order.present?
-     redirect_to root_path 
-    end
   end
 
   def pay_item
